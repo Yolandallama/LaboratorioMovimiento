@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float velocidad = 6f;
 
     [Header("Salto")]
-    [SerializeField] private float fuerzaSalto = 10f;
+    [SerializeField] private float fuerzaSalto = 14f;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float radioDeteccion = 0.2f;
     [SerializeField] private LayerMask groundLayer;
@@ -22,17 +22,14 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // Movimiento horizontal
         movimientoHorizontal = Input.GetAxisRaw("Horizontal");
 
-        // Detecta si el jugador está tocando el suelo
         isGrounded = Physics2D.OverlapCircle(
             groundCheck.position,
             radioDeteccion,
             groundLayer
         );
 
-        // Salta solo cuando está tocando el suelo
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.linearVelocity = new Vector2(
