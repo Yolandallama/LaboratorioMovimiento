@@ -256,6 +256,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &597227248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 597227249}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &597227249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597227248}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1096646152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,7 +695,8 @@ Transform:
   m_LocalPosition: {x: -4, y: -2.5, z: 0}
   m_LocalScale: {x: 0.8, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 597227249}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1096646153
@@ -680,6 +712,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   velocidad: 6
+  fuerzaSalto: 14
+  groundCheck: {fileID: 597227249}
+  radioDeteccion: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1366206497
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +729,7 @@ GameObject:
   - component: {fileID: 1366206500}
   - component: {fileID: 1366206499}
   - component: {fileID: 1366206498}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plataforma01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -969,7 +1007,7 @@ GameObject:
   - component: {fileID: 1454286458}
   - component: {fileID: 1454286457}
   - component: {fileID: 1454286456}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plataforma02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1108,7 +1146,7 @@ GameObject:
   - component: {fileID: 1505136088}
   - component: {fileID: 1505136087}
   - component: {fileID: 1505136086}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plataforma03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1247,7 +1285,7 @@ GameObject:
   - component: {fileID: 2004834894}
   - component: {fileID: 2004834893}
   - component: {fileID: 2004834892}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Suelo
   m_TagString: Untagged
   m_Icon: {fileID: 0}

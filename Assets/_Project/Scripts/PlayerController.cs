@@ -5,27 +5,59 @@ public class PlayerController : MonoBehaviour
     [Header("Movimiento")]
     [SerializeField] private float velocidad = 6f;
 
+    [Header("Salto")]
+    [SerializeField] private float fuerzaSalto = 10f;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float radioDeteccion = 0.2f;
+    [SerializeField] private LayerMask groundLayer;
+
     private Rigidbody2D rb;
     private float movimientoHorizontal;
+    private bool isGrounded;
 
     private void Awake()
     {
-        // Obtiene el Rigidbody2D del personaje.
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        // Detecta izquierda y derecha con respuesta inmediata.
+        // Movimiento horizontal
         movimientoHorizontal = Input.GetAxisRaw("Horizontal");
+
+        // Detecta si el jugador está tocando el suelo
+        isGrounded = Physics2D.OverlapCircle(
+            groundCheck.position,
+            radioDeteccion,
+            groundLayer
+        );
+
+        // Salta solo cuando está tocando el suelo
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            rb.linearVelocity = new Vector2(
+                rb.linearVelocity.x,
+                fuerzaSalto
+            );
+        }
     }
 
     private void FixedUpdate()
     {
-        // Aplica el movimiento horizontal conservando la velocidad vertical.
         rb.linearVelocity = new Vector2(
             movimientoHorizontal * velocidad,
             rb.linearVelocity.y
         );
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (groundCheck != null)
+        {
+            Gizmos.DrawWireSphere(
+                groundCheck.position,
+                radioDeteccion
+            );
+        }
     }
 }
