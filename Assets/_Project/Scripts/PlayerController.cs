@@ -12,24 +12,30 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     private Rigidbody2D rb;
+    private Animator animator;
+
     private float movimientoHorizontal;
     private bool isGrounded;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
+        // Movimiento horizontal
         movimientoHorizontal = Input.GetAxisRaw("Horizontal");
 
+        // Detectar si el jugador está tocando el suelo
         isGrounded = Physics2D.OverlapCircle(
             groundCheck.position,
             radioDeteccion,
             groundLayer
         );
 
+        // Salto
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.linearVelocity = new Vector2(
@@ -37,6 +43,20 @@ public class PlayerController : MonoBehaviour
                 fuerzaSalto
             );
         }
+
+        // -------------------------
+        // CONTROL DE ANIMACIONES
+        // -------------------------
+
+        animator.SetBool(
+            "isRunning",
+            Mathf.Abs(movimientoHorizontal) > 0.01f
+        );
+
+        animator.SetBool(
+            "isJumping",
+            !isGrounded
+        );
     }
 
     private void FixedUpdate()
